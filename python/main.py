@@ -16,7 +16,7 @@ def list_files_recursive(directory, output_file):
 
 # Main entry point
 if __name__ == '__main__':
-    directory = '/home'
+    directory = '/home/akmot/Documents/GitHub/Benchmark_bash_python_rust'
     output_file = 'files_python.txt'
     log_file = 'list_files_log.log'
     
