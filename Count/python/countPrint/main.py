@@ -7,4 +7,4 @@ count_to = int(sys.argv[1])
 for i in range(1, count_to + 1):
     print(i)
 
-print("Counting completed.")
+

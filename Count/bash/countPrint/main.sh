@@ -9,4 +9,4 @@ done
 
 wait
 
-echo "Counting completed."
+

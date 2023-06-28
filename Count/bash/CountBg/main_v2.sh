@@ -10,5 +10,3 @@ done
 
 wait
 
-echo "Counting completed."
-echo "Result: $result"

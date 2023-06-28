@@ -9,5 +9,4 @@ for i in range(1, count_to + 1):
     result += 1
     print(result)
 
-print("Counting completed.")
-print("Result:", result)
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-maxVal=100000000
+maxVal=1000000
 
 # Function to log the script execution time
 log_execution_time() {
@@ -29,7 +29,7 @@ echo "Running countPrint script..."
 end_time_countprint=$(date +"%Y-%m-%d %T")
 log_execution_time "countPrint.sh" "$start_time_countprint" "$end_time_countprint" $maxVal
 
-echo -e "\e[32mScripts execution completed.\e[0m"
+echo -e "\e[32mScripts bash print execution completed.\e[0m"
 
 # Run CountBg script and log execution time
 start_time_countbg=$(date +"%Y-%m-%d %T")
@@ -38,7 +38,7 @@ echo "Running CountBg script..."
 end_time_countbg=$(date +"%Y-%m-%d %T")
 log_execution_time "CountBg.sh" "$start_time_countbg" "$end_time_countbg" $maxVal
 
-echo -e "\e[32mScripts execution completed.\e[0m"
+echo -e "\e[32mScripts bash bg execution completed.\e[0m"
 
 # Run countPrint python script and log execution time
 start_time_countprint=$(date +"%Y-%m-%d %T")
@@ -47,7 +47,7 @@ echo "Running countPrint script..."
 end_time_countprint=$(date +"%Y-%m-%d %T")
 log_execution_time "countPrint.py" "$start_time_countprint" "$end_time_countprint" $maxVal
 
-echo -e "\e[32mScripts execution completed.\e[0m"
+echo -e "\e[32mScripts python print execution completed.\e[0m"
 
 # Run CountBg python script and log execution time
 start_time_countbg=$(date +"%Y-%m-%d %T")
@@ -56,7 +56,7 @@ echo "Running CountBg python script..."
 end_time_countbg=$(date +"%Y-%m-%d %T")
 log_execution_time "CountBg.py" "$start_time_countbg" "$end_time_countbg" $maxVal
 
-echo -e "\e[32mScripts execution completed.\e[0m"
+echo -e "\e[32mScripts python bg execution completed.\e[0m"
 
 # Run countPrint rust script and log execution time
 start_time_countprint=$(date +"%Y-%m-%d %T")
@@ -65,7 +65,7 @@ echo "Running countPrint script..."
 end_time_countprint=$(date +"%Y-%m-%d %T")
 log_execution_time "count_print" "$start_time_countprint" "$end_time_countprint" $maxVal
 
-echo -e "\e[32mScripts execution completed.\e[0m"
+echo -e "\e[32mScripts rust print execution completed.\e[0m"
 
 # Run CountBg rust script and log execution time
 start_time_countbg=$(date +"%Y-%m-%d %T")
@@ -74,4 +74,4 @@ echo "Running CountBg rust script..."
 end_time_countbg=$(date +"%Y-%m-%d %T")
 log_execution_time "Count_Bg" "$start_time_countbg" "$end_time_countbg" $maxVal
 
-echo -e "\e[32mScripts execution completed.\e[0m"
+echo -e "\e[32mScripts rust bg execution completed.\e[0m"

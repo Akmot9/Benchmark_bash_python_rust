@@ -9,6 +9,5 @@ fn main() {
         result += 1;
     }
 
-    println!("Counting completed.");
-    println!("Result: {}", result);
+    
 }
