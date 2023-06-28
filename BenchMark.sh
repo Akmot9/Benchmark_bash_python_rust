@@ -1,6 +1,6 @@
 #!/bin/bash
 
-maxVal=10000000
+maxVal=100000000
 
 # Function to log the script execution time
 log_execution_time() {
@@ -51,7 +51,7 @@ echo -e "\e[32mScripts execution completed.\e[0m"
 
 # Run CountBg python script and log execution time
 start_time_countbg=$(date +"%Y-%m-%d %T")
-echo "Running CountBg script..."
+echo "Running CountBg python script..."
 ./Count/python/CountBg/main_v2.py $maxVal
 end_time_countbg=$(date +"%Y-%m-%d %T")
 log_execution_time "CountBg.py" "$start_time_countbg" "$end_time_countbg" $maxVal
@@ -69,7 +69,7 @@ echo -e "\e[32mScripts execution completed.\e[0m"
 
 # Run CountBg rust script and log execution time
 start_time_countbg=$(date +"%Y-%m-%d %T")
-echo "Running CountBg script..."
+echo "Running CountBg rust script..."
 ./Count/rust/count_bg/target/debug/count_bg $maxVal
 end_time_countbg=$(date +"%Y-%m-%d %T")
 log_execution_time "Count_Bg" "$start_time_countbg" "$end_time_countbg" $maxVal
