@@ -1,6 +1,12 @@
 #!/bin/bash
 
-for ((i=1; i<=100000; i++))
-do
-    echo $i
+count_to=$1
+
+
+for ((i=1; i<=count_to; i++)); do
+    echo $i 
 done
+
+wait
+
+echo "Counting completed."
