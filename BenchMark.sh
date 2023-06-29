@@ -1,77 +1,64 @@
 #!/bin/bash
 
-maxVal=1000000
+maxVal=3
 
-# Function to log the script execution time
 log_execution_time() {
     local script_name="$1"
     local start_time="$2"
     local end_time="$3"
+    local pid_pross="$4"
 
     local start_seconds=$(date -d "$start_time" +%s)
     local end_seconds=$(date -d "$end_time" +%s)
     local execution_time=$((end_seconds - start_seconds))
 
     echo "Script: $script_name" >> logfile.log
-    
+    echo "PID: $pid_pross" >> logfile.log
     echo "Execution Time: $execution_time seconds" >> logfile.log
     echo "---" >> logfile.log
 }
 
-echo " " >> logfile.log
+execute_script() {
+    local script_path="$1"
+    local script_name="$2"
+    local start_time
+    local end_time
+    local pid_pross
 
-echo "Max Value: $maxVal" >> logfile.log
+    start_time=$(date +"%Y-%m-%d %T")
+    echo "Running $script_name script..."
+    "$script_path" "$maxVal" &
+    pid_pross=$!
+    wait $pid_pross
+    end_time=$(date +"%Y-%m-%d %T")
+    log_execution_time "$script_name" "$start_time" "$end_time" "$pid_pross"
+}
 
-# Run countPrint script and log execution time
-start_time_countprint=$(date +"%Y-%m-%d %T")
-echo "Running countPrint script..."
-./Count/bash/countPrint/main_v2.sh $maxVal
-end_time_countprint=$(date +"%Y-%m-%d %T")
-log_execution_time "countPrint.sh" "$start_time_countprint" "$end_time_countprint" $maxVal
+process_files() {
+    local file_paths=("$@")
 
-echo -e "\e[32mScripts bash print execution completed.\e[0m"
+    echo " " >> logfile.log
+    echo "################### $(date +"%Y-%m-%d %T") ###############################" >> logfile.log
 
-# Run CountBg script and log execution time
-start_time_countbg=$(date +"%Y-%m-%d %T")
-echo "Running CountBg script..."
-./Count/bash/CountBg/main_v2.sh $maxVal
-end_time_countbg=$(date +"%Y-%m-%d %T")
-log_execution_time "CountBg.sh" "$start_time_countbg" "$end_time_countbg" $maxVal
+    for path in "${file_paths[@]}"; do
+        if [ -x "$path" ]; then
+            local script_name=$(basename "$path")
+            execute_script "$path" "$script_name"
+            echo -e "\e[32mExecution of $script_name completed.\e[0m"
+        else
+            echo -e "\e[31mError: $path is not executable or does not exist.\e[0m"
+        fi
+    done
+}
 
-echo -e "\e[32mScripts bash bg execution completed.\e[0m"
+# Example usage
+file_paths=(
+    "./Count/bash/countPrint/main_v2.sh"
+    "./Count/bash/CountBg/main_v2.sh"
+    "./Count/python/countPrint/main_v2.py"
+    "./Count/python/CountBg/main_v2.py"
+    "./Count/rust/count_print/target/debug/count_print"
+    "./Count/rust/count_bg/target/debug/count_bg"
+)
 
-# Run countPrint python script and log execution time
-start_time_countprint=$(date +"%Y-%m-%d %T")
-echo "Running countPrint script..."
-./Count/python/countPrint/main_v2.py $maxVal
-end_time_countprint=$(date +"%Y-%m-%d %T")
-log_execution_time "countPrint.py" "$start_time_countprint" "$end_time_countprint" $maxVal
-
-echo -e "\e[32mScripts python print execution completed.\e[0m"
-
-# Run CountBg python script and log execution time
-start_time_countbg=$(date +"%Y-%m-%d %T")
-echo "Running CountBg python script..."
-./Count/python/CountBg/main_v2.py $maxVal
-end_time_countbg=$(date +"%Y-%m-%d %T")
-log_execution_time "CountBg.py" "$start_time_countbg" "$end_time_countbg" $maxVal
-
-echo -e "\e[32mScripts python bg execution completed.\e[0m"
-
-# Run countPrint rust script and log execution time
-start_time_countprint=$(date +"%Y-%m-%d %T")
-echo "Running countPrint script..."
-./Count/rust/count_print/target/debug/count_print $maxVal
-end_time_countprint=$(date +"%Y-%m-%d %T")
-log_execution_time "count_print" "$start_time_countprint" "$end_time_countprint" $maxVal
-
-echo -e "\e[32mScripts rust print execution completed.\e[0m"
-
-# Run CountBg rust script and log execution time
-start_time_countbg=$(date +"%Y-%m-%d %T")
-echo "Running CountBg rust script..."
-./Count/rust/count_bg/target/debug/count_bg $maxVal
-end_time_countbg=$(date +"%Y-%m-%d %T")
-log_execution_time "Count_Bg" "$start_time_countbg" "$end_time_countbg" $maxVal
-
-echo -e "\e[32mScripts rust bg execution completed.\e[0m"
+process_files "${file_paths[@]}"
