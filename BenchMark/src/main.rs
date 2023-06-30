@@ -1,4 +1,7 @@
-use std::vec::Vec;
+mod functions;
+mod log_writer;
+use functions::execute_process;
+use log_writer::append_to_log_file;
 
 fn main() {
     let file_paths: Vec<&str> = vec![
@@ -10,7 +13,9 @@ fn main() {
         "./Count/rust/count_bg/target/debug/count_bg",
     ];
 
+    let argument_value = 2; // Example integer argument value
+    append_to_log_file("FICHIER DE LOG") ;
     for path in file_paths {
-        println!("{}", path);
+        execute_process(path, argument_value);
     }
 }
