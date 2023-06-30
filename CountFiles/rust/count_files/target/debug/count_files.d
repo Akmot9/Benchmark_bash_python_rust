@@ -1,0 +1,1 @@
+/home/akmot/Documents/GitHub/Benchmark_bash_python_rust/CountFiles/rust/count_files/target/debug/count_files: /home/akmot/Documents/GitHub/Benchmark_bash_python_rust/CountFiles/rust/count_files/src/main.rs
