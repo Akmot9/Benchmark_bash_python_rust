@@ -1,1 +1,1 @@
-find /home -type f | wc -l
+sudo find / -type f -not \( -path '/dev/*' -or -path '/proc/*' -or -path '/sys/*' -or -path '/run/*' \) | wc -l
