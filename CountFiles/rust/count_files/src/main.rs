@@ -1,34 +1,32 @@
-use std::fs::{self, File};
-use std::io::Write;
-use std::os::unix::fs::MetadataExt;
+use std::fs;
+//use std::path::Path;
 
-fn list_files(start_path: &str) {
-    let ignore_dirs = ["/dev", "/proc", "/run", "/sys"];
-    let mut file = File::create("resultat.txt").expect("Unable to create file");
+fn count_files_recursive(start_path: &str) -> u64 {
+    let mut file_count: u64 = 0;
 
-    for entry in fs::read_dir(start_path).expect("Unable to read directory") {
-        let entry = entry.expect("Unable to get directory entry");
+    let entries = fs::read_dir(start_path)?;
+    for entry in entries {
+        let entry = entry?;
         let path = entry.path();
 
-        let metadata = entry.metadata().expect("Unable to read metadata");
-
-        if metadata.file_type().is_symlink() {
-            continue;
-        }
-
-        if path.is_dir() {
-            if ignore_dirs.contains(&path.to_str().unwrap()) {
-                continue;
-            }
-
-            list_files(&path.to_string_lossy());
-        } else {
-            let file_path = path.to_string_lossy().to_string();
-            writeln!(file, "{}", file_path).expect("Unable to write to file");
+        if path.is_file() {
+            println!("Fichiers : {}", path.display());
+            file_count += 1;
+        } else if path.is_dir() {
+            let sub_dir_count = count_files_recursive(path.to_str().unwrap())?;
+            println!("Fichiers : {}", path.display());
+            println!("truc : {}", sub_dir_count);
+            //file_count += sub_dir_count;
         }
     }
+
+    file_count
 }
 
 fn main() {
-    list_files("/");
+    let num_files = count_files_recursive("/home/akmot/Documents/GitHub");
+    match num_files {
+        Ok(count) => println!("Le nombre total de fichiers dans le dossier et ses sous-dossiers est : {}", count),
+        Err(e) => eprintln!("Erreur lors du comptage des fichiers : {}", e),
+    }
 }

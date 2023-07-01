@@ -1,1 +1,1 @@
-sudo find / -type f -not \( -path '/dev/*' -or -path '/proc/*' -or -path '/sys/*' -or -path '/run/*' \) | wc -l
+sudo find /home/akmot/Documents/GitHub/Benchmark_bash_python_rust/CountFiles/rust/count_files -type f -not \( -path '/dev/*' -or -path '/proc/*' -or -path '/sys/*' -or -path '/run/*' \) | wc -l
