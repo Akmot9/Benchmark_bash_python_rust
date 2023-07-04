@@ -1,6 +1,10 @@
 *.txt
 *.log
-Benchmark_bash_python_rust/BenchMark/target/*
+*.json
+*.TAG
+*.d
+*.rmeta
+Benchmark_bash_python_rust/BenchMark/target/*/*
 Count/rust/count_bg/target/*
 CountFiles/rust/count_bg/target/*
 Files/rust/count_bg/target/*
