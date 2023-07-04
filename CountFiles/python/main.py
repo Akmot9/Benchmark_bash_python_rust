@@ -13,5 +13,5 @@ def count_files(start_path):
                 file_count += 1
     return file_count
 
-num_files = count_files('/home/akmot/Documents/GitHub')
+num_files = count_files('/')
 print("Le nombre total de fichiers dans '/home' est :", num_files)
