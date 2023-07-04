@@ -4,3 +4,7 @@ Benchmark_bash_python_rust/BenchMark/target/*
 Count/rust/count_bg/target/*
 CountFiles/rust/count_bg/target/*
 Files/rust/count_bg/target/*
+Benchmark_bash_python_rust/BenchMark/target/
+Count/rust/count_bg/target/
+CountFiles/rust/count_bg/target/
+Files/rust/count_bg/target/
